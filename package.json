@@ -43,7 +43,7 @@
     "jest-junit": "^15.0.0",
     "jest-prosemirror": "^1.0.10",
     "jest-sonar-reporter": "^2.0.0",
-    "lint-staged": "^15.4.0",
+    "lint-staged": "^16.2.3",
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.2",
     "ts-node": "^10.9.1",
