@@ -1,0 +1,71 @@
+{
+  "name": "@modusoperandi/licit-rich-copy-embed-images",
+  "version": "0.1.1",
+  "type": "module",
+  "subversion": "1",
+  "description": "Plugin responsible for smart image copy/paste.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MO-Movia/licit-plugin-contrib-rich-copy-embed-images"
+  },
+  "scripts": {
+    "test": "jest --coverage",
+    "lint:ts": "eslint src --ext .ts",
+    "lint:css": "echo no CSS in this project",
+    "lint": "npm run lint:css & npm run lint:ts",
+    "test:unit": "jest --coverage",
+    "test:coverage": "jest --coverage",
+    "debug": "node --debug-brk --inspect ./node_modules/.bin/jest -i",
+    "ci:build": "tsc --build tsconfig.prod.json && copyfiles --up 1 \"src/**/*.css\" dist  && copyfiles package.json README.md LICENSE dist",
+    "ci:bom": "npx cyclonedx-npm --ignore-npm-errors --short-PURLs --output-format XML --output-file dist/bom.xml",
+    "verify": "npm run lint -- --fix && npm run ci:build && npm run test:coverage && echo 'All Tests Passed!'"
+  },
+  "peerDependencies": {
+    "@modusoperandi/licit-ui-commands": "^1.0.3",
+    "prosemirror-model": "^1.16.0",
+    "prosemirror-state": "^1.4.2",
+    "prosemirror-transform": "^1.7.0",
+    "prosemirror-view": "^1.27.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^18.19.129",
+    "@modusoperandi/eslint-config": "^2.1.4",
+    "copyfiles": "^2.4.1",
+    "eslint": "^9.37.0",
+    "husky": "^9.1.7",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "jest-junit": "^16.0.0",
+    "jest-prosemirror": "^1.0.31",
+    "jest-sonar-reporter": "^2.0.0",
+    "lint-staged": "^16.2.3",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.4.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "importSort": {
+    ".js": {
+      "parser": "babylon",
+      "style": "module-grouping"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "!(*test|*.setup).ts": [
+      "eslint --fix"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  }
+}
