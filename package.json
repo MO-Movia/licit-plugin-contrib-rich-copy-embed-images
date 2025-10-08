@@ -1,6 +1,6 @@
 {
   "name": "@modusoperandi/licit-rich-copy-embed-images",
-  "version": "0.1.1",
+  "version": "1.0.1",
   "type": "module",
   "subversion": "1",
   "description": "Plugin responsible for smart image copy/paste.",
@@ -19,7 +19,7 @@
     "test:unit": "jest --coverage",
     "test:coverage": "jest --coverage",
     "debug": "node --debug-brk --inspect ./node_modules/.bin/jest -i",
-    "ci:build": "tsc --build tsconfig.prod.json && copyfiles --up 1 \"src/**/*.css\" dist  && copyfiles package.json README.md LICENSE dist",
+    "ci:build": "tsc -b tsconfig.prod.json --clean && tsc -b tsconfig.prod.json && copyfiles --up 1 \"src/**/*.css\" dist  && copyfiles package.json README.md LICENSE dist",
     "ci:bom": "npx cyclonedx-npm --ignore-npm-errors --short-PURLs --output-format XML --output-file dist/bom.xml",
     "verify": "npm run lint -- --fix && npm run ci:build && npm run test:coverage && echo 'All Tests Passed!'"
   },
