@@ -1,3 +1,8 @@
+/**
+ * @license MIT
+ * @copyright Copyright 2025 Modus Operandi Inc. All Rights Reserved.
+ */
+
 import { RichCopyEmbedImagePlugin } from './index';
 import { EditorView } from 'prosemirror-view';
 import { EditorState } from 'prosemirror-state';
