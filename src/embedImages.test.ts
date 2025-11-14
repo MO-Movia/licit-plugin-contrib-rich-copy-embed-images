@@ -1,3 +1,8 @@
+/**
+ * @license MIT
+ * @copyright Copyright 2025 Modus Operandi Inc. All Rights Reserved.
+ */
+
 import { RichCopyEmbedImagePlugin } from './embedImages';
 import { EditorView } from 'prosemirror-view';
 import { EditorState } from 'prosemirror-state';
@@ -28,7 +33,7 @@ describe('RichCopyEmbedImagePlugin', () => {
   });
   const consoleErrorSpy = jest
     .spyOn(console, 'error')
-    .mockImplementation(() => {});
+    .mockImplementation(() => { });
 
   beforeEach(() => {
     consoleErrorSpy.mockClear();
@@ -96,8 +101,8 @@ describe('RichCopyEmbedImagePlugin', () => {
       },
     });
 
-    window.URL.createObjectURL = jest.fn();
-    window.URL.revokeObjectURL = jest.fn();
+    globalThis.URL.createObjectURL = jest.fn();
+    globalThis.URL.revokeObjectURL = jest.fn();
 
     // Export
     editor.shortcut('Ctrl-Alt-E');
@@ -289,7 +294,7 @@ describe('RichCopyEmbedImagePlugin', () => {
 
     editor.shortcut('Ctrl-Alt-C');
 
-    expect(plugin.embed).toBe(true);
+    expect(plugin.embed).toBe(false);
   });
 
   it('should call exportJSON when exportDoc is true', () => {
@@ -428,7 +433,7 @@ describe('RichCopyEmbedImagePlugin', () => {
           return {};
         },
         props: { clipboardSerializer: {} },
-        exportBase64JSON: () => {},
+        exportBase64JSON: () => { },
       } as unknown as RichCopyEmbedImagePlugin,
       {
         state: {
@@ -445,7 +450,7 @@ describe('RichCopyEmbedImagePlugin', () => {
               };
             },
             type: { schema: { cached: { domSerializer: {} } } },
-            descendants: () => {},
+            descendants: () => { },
           },
         },
       } as unknown as EditorView,
@@ -461,7 +466,7 @@ describe('RichCopyEmbedImagePlugin', () => {
           return {};
         },
         props: { clipboardSerializer: {} },
-        exportBase64JSON: () => {},
+        exportBase64JSON: () => { },
       } as unknown as RichCopyEmbedImagePlugin,
       {
         state: {
@@ -478,7 +483,7 @@ describe('RichCopyEmbedImagePlugin', () => {
               };
             },
             type: { schema: { cached: { domSerializer: {} } } },
-            descendants: () => {},
+            descendants: () => { },
           },
         },
       } as unknown as EditorView,

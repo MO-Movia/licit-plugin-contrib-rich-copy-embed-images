@@ -1,4 +1,8 @@
-// Plugin to handle embed base64 data of images.
+/**
+ * @license MIT
+ * @copyright Copyright 2025 Modus Operandi Inc. All Rights Reserved.
+ */
+
 import {
   DOMSerializer,
   Schema,
@@ -42,10 +46,10 @@ export class RichCopyEmbedImagePlugin extends Plugin {
 
   onKeyDown(view: EditorView, event: KeyboardEvent): boolean {
     let process = false;
-    const doc = view['runtime']?.fetchCompleteDoc();
-    const tempView = RichCopyEmbedImagePlugin.createTempEditorView(view, doc);
 
     if (this.isBase64Export(event)) {
+      const doc = view['runtime']?.fetchCompleteDoc();
+      const tempView = RichCopyEmbedImagePlugin.createTempEditorView(view, doc);
       this.exportBase64JSON(tempView);
     } else {
       if (this.isCopySpecial(event)) {
@@ -57,6 +61,8 @@ export class RichCopyEmbedImagePlugin extends Plugin {
       }
       if (process) {
         this.embed = true;
+        const doc = view['runtime']?.fetchCompleteDoc();
+        const tempView = RichCopyEmbedImagePlugin.createTempEditorView(view, doc);
         this.setImageB64sEx(tempView);
       }
     }
@@ -108,12 +114,8 @@ export class RichCopyEmbedImagePlugin extends Plugin {
     const { canProxyImageSrc, getProxyImageSrc } = runtime;
     if (src && canProxyImageSrc && getProxyImageSrc && canProxyImageSrc(src)) {
       return await getProxyImageSrc(src)
-        .then((res) => {
-          return res;
-        })
-        .catch((_err) => {
-          return src;
-        });
+        .then((res) => res)
+        .catch(() => src);
     }
     return src;
   }
@@ -243,13 +245,13 @@ export class RichCopyEmbedImagePlugin extends Plugin {
     RichCopyEmbedImagePlugin.downloadToFile(
       JSON.stringify(doc.toJSON()),
       'licit-' +
-        today.getFullYear() +
-        (today.getMonth() + 1) +
-        today.getDate() +
-        today.getHours() +
-        today.getMinutes() +
-        today.getSeconds() +
-        today.getMilliseconds(),
+      today.getFullYear() +
+      (today.getMonth() + 1) +
+      today.getDate() +
+      today.getHours() +
+      today.getMinutes() +
+      today.getSeconds() +
+      today.getMilliseconds(),
       'application/json'
     );
   }
@@ -274,14 +276,14 @@ export class RichCopyEmbedImagePlugin extends Plugin {
     const a = document.createElement('a');
     const file = new Blob([content], { type: contentType });
 
-    if (window.URL.createObjectURL) {
-      a.href = window.URL.createObjectURL(file);
+    if (globalThis.URL.createObjectURL) {
+      a.href = globalThis.URL.createObjectURL(file);
     }
     a.download = filename;
     a.click();
 
-    if (window.URL.revokeObjectURL) {
-      window.URL.revokeObjectURL(a.href);
+    if (globalThis.URL.revokeObjectURL) {
+      globalThis.URL.revokeObjectURL(a.href);
     }
   }
 
