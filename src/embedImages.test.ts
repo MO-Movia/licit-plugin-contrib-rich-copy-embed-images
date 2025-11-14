@@ -101,8 +101,8 @@ describe('RichCopyEmbedImagePlugin', () => {
       },
     });
 
-    window.URL.createObjectURL = jest.fn();
-    window.URL.revokeObjectURL = jest.fn();
+    globalThis.URL.createObjectURL = jest.fn();
+    globalThis.URL.revokeObjectURL = jest.fn();
 
     // Export
     editor.shortcut('Ctrl-Alt-E');
