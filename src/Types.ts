@@ -3,13 +3,6 @@
  * @copyright Copyright 2025 Modus Operandi Inc. All Rights Reserved.
  */
 
-export type RenderCommentProps = {
-  commentThreadId: string;
-  isActive: boolean;
-  requestCommentThreadDeletion: () => void;
-  requestCommentThreadReflow: () => void;
-};
-
 export type VideoLike = {
   height: number;
   id: string;
@@ -31,7 +24,6 @@ export type NodeSpec = {
 export type EditorVideoRuntime = {
   // Video Proxy
   canProxyVideoSrc?: (src: string) => boolean;
-  getProxyVideoSrc?: (src: string) => string;
   getVideoSrc?: (id: string) => Promise<string>;
 
   // Video Upload
@@ -54,14 +46,5 @@ export type EditorRuntime = {
   // Image Upload
   canUploadImage?: () => boolean,
   uploadImage?: (obj: Blob) => Promise<ImageLike>,
-
-  // Comments
-  canComment?: () => boolean,
-  createCommentThreadID?: () => string,
-  renderComment?: (props: RenderCommentProps) => unknown,
-
-  // External HTML
-  canLoadHTML?: () => boolean,
-  loadHTML?: () => Promise<string>,
 
 };
